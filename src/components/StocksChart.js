@@ -33,7 +33,7 @@ class StocksChart extends Component {
 			axisY: {
 				title: "Volume",
 				titleFontColor: "#6D78AD",
-				lineColor: "#6D78AD",
+				// lineColor: "#6D78AD",
 				labelFontColor: "#6D78AD",
 				tickColor: "#6D78AD",
 				includeZero: false

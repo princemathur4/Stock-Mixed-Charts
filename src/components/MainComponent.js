@@ -49,7 +49,7 @@ class MainComponent extends Component {
         let volumeData = [];
         let priceData = [];
         if ((startDate !== "" && !moment(startDate, 'YYYY-MM-DD', true).isValid()) || (endDate !== "" && !moment(endDate, 'YYYY-MM-DD', true).isValid())) {
-            return
+            return //need to add notification error message
         }
         let push;
         data.forEach(obj => {
@@ -89,6 +89,7 @@ class MainComponent extends Component {
             startDate: "",
             endDate: ""
         });
+        this.getFilteredData();
     }
 
     render() {

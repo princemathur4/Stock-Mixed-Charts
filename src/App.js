@@ -8,20 +8,15 @@ import MainComponent from './components/MainComponent'
 class App extends Component {
     state = {
         isModalOpen: true,
-        volumeData: [],
-        priceData: [],
-        startDate: "",
-        endDate: "",
-        date: {},
         stocks: [],
         selectedStock: ""
     }
+    
     componentWillMount() {
         let stocks = new Set();
         data.forEach(obj => {
             stocks.add(obj.stock)
-        }
-        )
+        })
         let stockList = Array.from(stocks);
         let stockOptions = []
         stockList.forEach((name) => {
@@ -37,7 +32,6 @@ class App extends Component {
         console.log("stocks: ", stockOptions);
     }
 
-
     handleChangeSelect = (e, selectValue) => {
         console.log("selectValue: ", selectValue);
         this.setState({
@@ -45,14 +39,14 @@ class App extends Component {
             isModalOpen: false
         });
     }
+
     goBack = () => {
         this.setState({
             isModalOpen: true
         })
     }
+
     render() {
-        console.log("startdate: ", this.state.startDate);
-        console.log("enddate: ", this.state.endDate);
         return (
             <div className="App">
                 {this.state.isModalOpen &&
