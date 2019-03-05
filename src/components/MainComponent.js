@@ -6,6 +6,9 @@ import { Grid } from 'semantic-ui-react';
 import DateFilter from './DateFilter'
 import moment from 'moment';
 import StocksChart from './StocksChart'
+import { SemanticToastContainer, toast } from 'react-semantic-toasts';
+import 'react-semantic-toasts/styles/react-semantic-alert.css';
+
 
 class MainComponent extends Component {
     state = {
@@ -49,6 +52,21 @@ class MainComponent extends Component {
         })
     }
 
+    createToast(message, type) {
+        let typeIcon = {
+            'warning': 'info',
+            'error': 'exclamation'
+        }
+        setTimeout(() => {
+            toast({
+                title: message,
+                type: type,
+                icon: typeIcon[type],
+                animation: 'bounce',
+            });
+        }, 1);
+    }
+
     handleDate = (e, n) => {
         this.setState({
             [e]: n.target.value
@@ -61,13 +79,19 @@ class MainComponent extends Component {
         let volumeData = [];
         let priceData = [];
         if (!startDate && !endDate) {
-            return; //need to add notification error message
+            this.createToast("Select a date to filter", "warning");
+            return;
         }
         if ((startDate !== "" && !moment(startDate, 'YYYY-MM-DD', true).isValid()) || (endDate !== "" && !moment(endDate, 'YYYY-MM-DD', true).isValid())) {
-            return; //need to add notification error message
+            this.createToast("Please Enter a Valid Date!", "error");
+            return;
         }
         if (startDate && moment(startDate).isSameOrBefore(this.minDate) && endDate && moment(endDate).isSameOrAfter(this.maxDate)) {
-            return; //need to add notification error message
+            this.setState({
+                volumeData: this.defaultVolumeData,
+                priceData: this.defaultPriceData
+            });
+            return;
         }
         let push;
         data.forEach(obj => {
@@ -133,7 +157,7 @@ class MainComponent extends Component {
                         </Grid.Column>
                         <Grid.Column width={6}>
                             <DateFilter
-                                style={{ 'marginRight': '20%' }}
+                                style={{ 'marginRight': '14%' }}
                                 name={"endDate"}
                                 value={this.state.endDate}
                                 handleDate={this.handleDate.bind(this, "endDate")}
@@ -147,22 +171,22 @@ class MainComponent extends Component {
                     className="ui green button"
                     onClick={this.getFilteredData.bind(this)}>
                     Apply Filters
-                            </Button>
+                </Button>
 
                 <Button
                     className="ui orange button"
                     onClick={this.resetState}>
                     Reset Filters
-                            </Button>
+                </Button>
 
-                <Grid.Row className="content" style={{ margin: "2%" }}>
+                <Grid.Row className="content" style={{ margin: "1%" }}>
                     <Button
                         className="ui grey button"
                         onClick={this.props.goBack}>
                         Go Back to Stock Selection
-                        </Button>
+                    </Button>
                 </Grid.Row>
-
+                <SemanticToastContainer position="bottom-center" />
             </div>
         );
     }

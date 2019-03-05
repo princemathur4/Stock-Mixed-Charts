@@ -7,7 +7,7 @@ class DateFilter extends Component {
         return (
             <Menu.Item style={this.props.style}>
                 <h2>{this.props.label}</h2>
-                <Input placeholder={this.props.placeholder}
+                <Input 
                     type='date'
                     size='medium'
                     onChange={this.props.handleDate}
