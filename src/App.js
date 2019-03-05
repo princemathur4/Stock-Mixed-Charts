@@ -29,11 +29,9 @@ class App extends Component {
         this.setState({
             stocks: stockOptions,
         })
-        console.log("stocks: ", stockOptions);
     }
 
     handleChangeSelect = (e, selectValue) => {
-        console.log("selectValue: ", selectValue);
         this.setState({
             selectedStock: selectValue.value,
             isModalOpen: false
@@ -54,13 +52,13 @@ class App extends Component {
                         <header className="App-header">
                             <Container>
                                 <h1>Select Stocks from the options available below</h1>
-                                <Dropdown
-                                    placeholder={"Stocks"}
-                                    fluid search selection
-                                    options={this.state.stocks}
-                                    value={this.state.selectedStock}
-                                    onChange={this.handleChangeSelect.bind(this)}
-                                />
+                            <Dropdown
+                                placeholder={"Stocks"}
+                                fluid search selection
+                                options={this.state.stocks}
+                                value={this.state.selectedStock}
+                                onChange={this.handleChangeSelect.bind(this)}
+                            />
                             </Container>
                         </header>
                     </div>

@@ -14,27 +14,39 @@ class MainComponent extends Component {
         startDate: "",
         endDate: "",
     }
+
+    defaultVolumeData = []
+    defaultPriceData = []
+    minDate = ""
+    maxDate = ""
+
     componentWillMount() {
-        // if (!this.state.startDate && !this.state.endDate) { // to be removed later
-            let volumeData = [];
-            let priceData = [];
-            data.forEach(obj => {
-                if (this.props.selectedStock && obj.stock === this.props.selectedStock) {
-                    volumeData.push({
-                        x: new Date(obj.date),
-                        y: obj.volume
-                    })
-                    priceData.push({
-                        x: new Date(obj.date),
-                        y: obj.price
-                    })
-                }
-            })
-            this.setState({
-                volumeData: volumeData,
-                priceData: priceData
-            })
-        // }
+        let volumeData = [];
+        let priceData = [];
+        let timeArray = [];
+        data.forEach(obj => {
+            if (this.props.selectedStock && obj.stock === this.props.selectedStock) {
+                volumeData.push({
+                    x: new Date(obj.date),
+                    y: obj.volume
+                })
+                priceData.push({
+                    x: new Date(obj.date),
+                    y: obj.price
+                })
+                timeArray.push(moment(obj.date))
+            }
+        })
+
+        this.defaultVolumeData = volumeData;
+        this.defaultPriceData = priceData;
+        this.minDate = moment.min(timeArray)._i;
+        this.maxDate = moment.max(timeArray)._i;
+
+        this.setState({
+            volumeData: volumeData,
+            priceData: priceData
+        })
     }
 
     handleDate = (e, n) => {
@@ -48,8 +60,14 @@ class MainComponent extends Component {
         let endDate = this.state.endDate;
         let volumeData = [];
         let priceData = [];
+        if (!startDate && !endDate) {
+            return; //need to add notification error message
+        }
         if ((startDate !== "" && !moment(startDate, 'YYYY-MM-DD', true).isValid()) || (endDate !== "" && !moment(endDate, 'YYYY-MM-DD', true).isValid())) {
-            return //need to add notification error message
+            return; //need to add notification error message
+        }
+        if (startDate && moment(startDate).isSameOrBefore(this.minDate) && endDate && moment(endDate).isSameOrAfter(this.maxDate)) {
+            return; //need to add notification error message
         }
         let push;
         data.forEach(obj => {
@@ -84,17 +102,17 @@ class MainComponent extends Component {
             priceData: priceData
         });
     }
+
     resetState = () => {
         this.setState({
             startDate: "",
-            endDate: ""
+            endDate: "",
+            volumeData: this.defaultVolumeData,
+            priceData: this.defaultPriceData
         });
-        this.getFilteredData();
     }
 
     render() {
-        console.log("startdate: ", this.state.startDate);
-        console.log("enddate: ", this.state.endDate);
         return (
             <div className="App">
                 <StocksChart

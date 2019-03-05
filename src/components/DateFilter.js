@@ -9,7 +9,7 @@ class DateFilter extends Component {
                 <h2>{this.props.label}</h2>
                 <Input placeholder={this.props.placeholder}
                     type='date'
-                    size='normal'
+                    size='medium'
                     onChange={this.props.handleDate}
                     value={this.props.value}
                 />

@@ -22,7 +22,7 @@ class StocksChart extends Component {
 	
 	render() {
 		const options = {
-			theme: "light2",
+			theme: "dark2",
 			animationEnabled: true,
 			title:{
 				text: "Stock Pricing and Volume Data for " + this.props.selectedStock
@@ -33,7 +33,7 @@ class StocksChart extends Component {
 			axisY: {
 				title: "Volume",
 				titleFontColor: "#6D78AD",
-				// lineColor: "#6D78AD",
+				lineColor: "#6D78AD",
 				labelFontColor: "#6D78AD",
 				tickColor: "#6D78AD",
 				includeZero: false
