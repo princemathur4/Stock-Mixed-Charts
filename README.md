@@ -21,6 +21,7 @@ Chart template used:
 
 UI template used: 
 [Semantic UI](https://semantic-ui.com/)
+Not used but it is amazing [Material UI]
 
 Notications/Toast:
 [React-Toast](https://www.npmjs.com/package/react-semantic-toasts)
