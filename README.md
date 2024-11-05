@@ -1,3 +1,5 @@
+
+https://github.com/user-attachments/assets/f87529ae-ec60-4659-82cd-65fcfab6458a
 # Stock Charts
 *Line-Bar Mixed charts are rendered using JSON data*
 
@@ -24,3 +26,6 @@ UI template used:
 
 Notications/Toast:
 [React-Toast](https://www.npmjs.com/package/react-semantic-toasts)
+
+## Demo
+https://github.com/user-attachments/assets/963473d1-ad56-4813-8644-22c4dbeead17
