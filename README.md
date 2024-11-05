@@ -1,5 +1,3 @@
-
-https://github.com/user-attachments/assets/f87529ae-ec60-4659-82cd-65fcfab6458a
 # Stock Charts
 *Line-Bar Mixed charts are rendered using JSON data*
 
